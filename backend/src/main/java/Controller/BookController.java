@@ -21,7 +21,7 @@ public class BookController {
 
 
 @PostMapping
-public ResponseEntity<Book> addBook (RequestBody Book book){
+public ResponseEntity<Book> addBook (@RequestBody Book book){
     Book savedBook = bookservice.addBook(book);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
 }
