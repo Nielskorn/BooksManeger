@@ -1,15 +1,20 @@
-package org.neuefische.backend.service;
+package service;
 
 import lombok.RequiredArgsConstructor;
-import org.neuefische.backend.model.Book;
+import model.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class BookService {
-   final BookRepo bookRepo;
+
+   private final BookRepo bookRepo;
+
+    public BookService(BookRepo bookRepo) {
+        this.bookRepo = bookRepo;
+    }
+
     public List<Book> getAllBooks() {
         return bookRepo.findAll();
     }
@@ -18,5 +23,13 @@ public class BookService {
     }
     public Book addBook(Book book) {
         return  bookRepo.save(book);
+    }
+
+    public Book updateBook(Book book) {
+        return bookRepo.save(book);
+    }
+
+    public void deleteBook(String id) {
+         bookRepo.deleteById(id);
     }
 }

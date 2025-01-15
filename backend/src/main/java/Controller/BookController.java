@@ -2,39 +2,47 @@ package Controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.neuefische.backend.model.Book;
-import org.neuefische.backend.service.BookService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import model.Book;
+import service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/api/book")
 @RestController
-@RequiredArgsConstructor
+
 
 
 public class BookController {
-    private final BookService  bookservice;
+ private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
 
-
-@PostMapping
-public ResponseEntity<Book> addBook (RequestBody Book book){
-    Book savedBook = bookservice.addBook(book);
-    return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
+    @PostMapping
+public Book addBook (@RequestBody Book book){
+    return bookService.addBook(book);
 }
 
 @GetMapping ("/{id}")
-public ResponseEntity<Book> getBookById(@PathVariable String id){
-    Book book =bookservice.getBookById (id);
-    return ResponseEntity.ok(book);
+public Book getBookById(@PathVariable String id){
+     return bookService.getBookById(id);
 }
 
 @GetMapping
-public ResponseEntity<List<Book>> getAllBooks(){
-    List<Book> books = bookservice.getAllBooks();
-    return ResponseEntity.ok(books);
+public List <Book> getAllBooks(){
+    return bookService.getAllBooks();
+}
+
+@PutMapping("/{id}")
+public Book updateBook(@PathVariable String id, @RequestBody Book book){
+    return bookService.updateBook(book);
+}
+
+@DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable String id){
+    bookService.deleteBook(id);
 }
 }
