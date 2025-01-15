@@ -1,7 +1,7 @@
-package service;
+package org.neuefische.backend.service;
 
-import lombok.RequiredArgsConstructor;
-import model.Book;
+import org.neuefische.backend.model.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +14,9 @@ public class BookService {
     public BookService(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
     }
+
+    //public BookService(BookRepo bookRepo) {
+
 
     public List<Book> getAllBooks() {
         return bookRepo.findAll();

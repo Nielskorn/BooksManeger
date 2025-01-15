@@ -1,10 +1,12 @@
-export default function BookCard(){
+import {Book} from "../Book.ts";
+
+export default function BookCard(book:Book){
     return(
         <>
-        <h2>{title}</h2>
-         <img src={picUrl} />
-         <p>author: {author}</p>
-        <p>isbn:{isbn}</p>
+        <h2>{book.title}</h2>
+         <img src={book.image} />
+         <p>author: {book.author}</p>
+        <p>isbn:{book.isbn}</p>
         </>
 
     )

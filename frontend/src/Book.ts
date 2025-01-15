@@ -1,4 +1,6 @@
-type Book={
-    title:string
-    isbn:
+export type Book={
+    title:string,
+    isbn:number,
+    author:string,
+    image:string
 }

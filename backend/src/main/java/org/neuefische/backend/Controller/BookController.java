@@ -1,9 +1,8 @@
-package Controller;
+package org.neuefische.backend.Controller;
 
 
-import lombok.RequiredArgsConstructor;
-import model.Book;
-import service.BookService;
+import org.neuefische.backend.model.Book;
+import org.neuefische.backend.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +31,8 @@ public Book getBookById(@PathVariable String id){
 }
 
 @GetMapping
-public List <Book> getAllBooks(){
-    return bookService.getAllBooks();
+public List <Book> getAllBooks(){return
+bookService.getAllBooks();
 }
 
 @PutMapping("/{id}")

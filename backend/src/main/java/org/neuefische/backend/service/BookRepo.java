@@ -1,6 +1,6 @@
-package service;
+package org.neuefische.backend.service;
 
-import model.Book;
+import org.neuefische.backend.model.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
