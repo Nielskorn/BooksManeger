@@ -2,7 +2,6 @@ package org.neuefische.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.neuefische.backend.model.Book;
-import org.neuefische.backend.repo.BookRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,5 +15,8 @@ public class BookService {
     }
     public Book getBookById(String id) {
         return bookRepo.findById(id).orElseThrow();
+    }
+    public Book addBook(Book book) {
+        return  bookRepo.save(book);
     }
 }
