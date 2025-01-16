@@ -1,10 +1,12 @@
-import { useState,useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 
 import './App.css'
 
 import {Book} from "./Book.ts";
 import axios from "axios"
 import BookGallery from "./Componets/BookGallery.tsx";
+import BookForm from "./Componets/BookForm.tsx";
+import {Route, Routes} from "react-router-dom";
 
 
 function App() {
@@ -27,10 +29,14 @@ function App() {
     <>
         <header>
             <h1>Book</h1>
+            <BookForm fetchData={fetchData}/>
         </header>
         <div>
         <BookGallery books={data} />
      </div>
+        <Routes>
+            <Route path={"/"} element={<></>}/>
+        </Routes>
     </>
   )
 }

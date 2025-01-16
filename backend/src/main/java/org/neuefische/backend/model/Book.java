@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 //@Document("book")
 public record Book(@Id String isbn ,
-                   String titel,
+                   String title,
                    String author,
                    String image) {
 }
