@@ -7,12 +7,12 @@ import org.neuefische.backend.service.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,19 +26,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Autowired
     private BookRepo bookRepo;
 
-    @BeforeEach
-    void setUp() {
-        bookRepo.deleteAll();
-    }
-
     @Test
-
     void getAllBooks_ShouldReturnAllBooks() throws Exception {
         bookRepo.saveAll(List.of(
                 new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1"),
                 new Book("1b", "Hamburger Coders 2", "Niels and Emre", "TestImage2")
         ));
-
         // Act & Assert: API-Aufruf und Validierung
         mockMvc.perform(get("/api/book"))
                 .andExpect(status().isOk())
@@ -58,6 +51,84 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                     }
                 ]
                 """));
+    }
+
+    @Test
+    void getBookById_ShouldReturnBook() throws Exception{
+       Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage"));
+       mockMvc.perform(get("/api/book/1a"))
+               .andExpect(status().isOk())
+               .andExpect(content().json("""
+                       {
+                        "isbn": "1a",
+                        "title": "Hamburger Coders",
+                        "author": "Niels and Emre",
+                        "image": "TestImage"
+                       }
+                       """));
+
+    }
+
+    @Test
+    void updateBook_ShouldUpdateBook() throws Exception{
+        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage"));
+        String updateBook= """
+                {
+                "isbn": "1d",
+                "title": "Updated Book",
+                "author": "Updated Author",
+                "image": "UpdatedImage"
+                }
+                """;
+        mockMvc.perform(put("/api/book/"+existintBook.isbn())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(updateBook))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                 {
+                                    "isbn": "1d",
+                                    "title": "Updated Book",
+                                    "author": "Updated Author",
+                                    "image": "UpdatedImage"
+                                }
+                """));
+    }
+
+    @Test
+    void updateBook_ShouldNotUpdateBook() throws Exception{
+        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage"));
+        String updateBook= """
+                {
+                "isbn": "1b",
+                "title": "Updated Book",
+                "author": "Updated Author",
+                "image": "UpdatedImage"
+                }
+                """;
+        mockMvc.perform(put("/api/book/"+existintBook.isbn())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updateBook))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                 {
+                                    "isbn": "1d",
+                                    "title": "Updated Book",
+                                    "author": "Updated Author",
+                                    "image": "UpdatedImage"
+                                }
+                """));
+    }
+
+    @Test
+    void deleteBook_ShouldDeleteBook() throws Exception{
+        Book book = bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image"));
+        mockMvc.perform(delete("/api/book/1e"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/book"))
+                .andExpect(status().isOk());
+
+
     }
 
 
