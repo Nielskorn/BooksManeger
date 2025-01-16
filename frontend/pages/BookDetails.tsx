@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import { Book } from "../Book.ts";
+import { Book } from "../src/Book";
 import axios from "axios";
 
 
@@ -12,19 +12,14 @@ function BookDetails() {
     axios.get("/api/book/"+id)
         .then(response => {
             setData(response.data);
-            console.log(response.data.title);
+           // console.log(response.data.title);
         })
         .catch(error => {
             console.log(error);
-            const book1: Book = {
-                author: "jim",
-                isbn: 1234,
-                image: "https://picsum.photos/50/150",
-                title: "test"
-            };
-            const Books: Book[] = [book1];
-            setData(Books);
-        });}
+        })
+
+        }
+
     useEffect(() => {
         getBook();
     }, []);

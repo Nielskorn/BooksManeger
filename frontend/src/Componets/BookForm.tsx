@@ -26,28 +26,29 @@ export default function BookForm({fetchData}:{fetchData:()=>void}){
 
     return(
         <>
-            <form onSubmit={OnSubmit} >
+            <form onSubmit={OnSubmit}>
                 <label> Titel:
                     <input type={"text"} value={title} onChange={event => {
                         setTitle(event.target.value)
                     }}/>
                 </label>
                 <label> Author:
-                <input type={"text"} value={author} onChange={event => {
-                    setAuthor(event.target.value)
-                }}/>
+                    <input type={"text"} value={author} onChange={event => {
+                        setAuthor(event.target.value)
+                    }}/>
                 </label>
                 <label> ImageUrl:
                     <input type={"text"} value={image} onChange={event => {
                         setImage(event.target.value)
                     }}/>
-                    </label>
+                </label>
                 <label> ISBN:
                     <input type={"text"} value={isbn} onChange={event => {
                         setIsbn(event.target.value)
                     }}/>
                 </label>
-                    <button type={"submit"}>create Book</button>
+                <button type={"submit"}>create Book</button>
+                <button type={"reset"}>create Book</button>
 
             </form>
 
