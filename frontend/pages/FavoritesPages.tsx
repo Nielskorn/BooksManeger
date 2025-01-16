@@ -4,8 +4,8 @@ function FavoritesPage() {
     return (
         <div>
             <h1>Favoriten</h1>
-        <p>Hier sind deine Lieblingsbücher!</p>
-    </div>
+            <p>Hier sind deine Lieblingsbücher!</p>
+        </div>
 );
 }
 
