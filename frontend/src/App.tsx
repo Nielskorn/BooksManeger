@@ -10,7 +10,7 @@ import BookGallery from "./Componets/BookGallery.tsx";
 function App() {
     const [data,setData]=useState<Book[]>([])
     function fetchData(){
-        axios.get("api/book").then(response=>{setData(response.data)}
+        axios.get("/api/book").then(response=>{setData(response.data);console.log(response.data.title)}
 
         ).catch(error=>{console.log(error)
             const book1:Book={author:"jim" , isbn:1234, image:"https://picsum.photos/50/150",title:"test"}
@@ -23,14 +23,13 @@ function App() {
         fetchData()
     }, [])
 
-
-
-
   return(
     <>
-     <div>
-         <h1>Book</h1>
-         <BookGallery books={data} />
+        <header>
+            <h1>Book</h1>
+        </header>
+        <div>
+        <BookGallery books={data} />
      </div>
     </>
   )
