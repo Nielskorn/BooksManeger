@@ -5,7 +5,7 @@ type BookGalleryProps={
     books:Book[]
 }
 export default function BookGallery(books:BookGalleryProps){
-    const bookcards=books.books.map((book:Book)=><BookCard key={book.isbn} title={book.title} isbn={book.isbn} author={book.author} image={book.image}/>)
+    const bookcards=books.books.map((book:Book)=><BookCard key={book.isbn} title={book.title} isbn={book.isbn} author={book.author} image={book.image} favorite={book.favorite} />)
     return(
         <>
             {bookcards}

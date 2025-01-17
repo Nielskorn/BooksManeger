@@ -1,11 +1,11 @@
 import BookForm from "../src/Componets/BookForm";
 import BookGallery from "../src/Componets/BookGallery";
-import {useEffect, useState} from "react";
-import {Book} from "../src/types/Book.ts";
+import { useEffect, useState } from "react";
+import { Book } from "../src/types/Book.ts";
 import axios from "axios";
 
- function HomePage() {
-     const [data, setData] = useState<Book[]>([]);
+function HomePage() {
+    const [data, setData] = useState<Book[]>([]);
 
      // Funktion zum Datenholen
      function fetchData() {
@@ -63,7 +63,7 @@ import axios from "axios";
      };
 
      return (
-         <div style={styles.container}>
+         <div>
              <div style={styles.header}>
                  <h1 style={styles.title}>Willkommen in der Book Library!</h1>
                  <p style={styles.subtitle}>
@@ -71,7 +71,7 @@ import axios from "axios";
                  </p>
              </div>
 
-             <div style={styles.content}>
+             <div >
                  <div>
                      <h2 style={{color: "darkblue", marginBottom: "1rem"}}>Books</h2>
                      <BookForm fetchData={fetchData}/>

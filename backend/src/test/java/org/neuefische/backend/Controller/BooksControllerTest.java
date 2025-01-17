@@ -29,8 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     void getAllBooks_ShouldReturnAllBooks() throws Exception {
         bookRepo.saveAll(List.of(
-                new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1"),
-                new Book("1b", "Hamburger Coders 2", "Niels and Emre", "TestImage2")
+                new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1",false),
+                new Book("1b", "Hamburger Coders 2", "Niels and Emre", "TestImage2",false)
         ));
         // Act & Assert: API-Aufruf und Validierung
         mockMvc.perform(get("/api/book"))
@@ -55,7 +55,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     void getBookById_ShouldReturnBook() throws Exception{
-       Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage"));
+       Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
        mockMvc.perform(get("/api/book/1a"))
                .andExpect(status().isOk())
                .andExpect(content().json("""
@@ -71,13 +71,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     void updateBook_ShouldUpdateBook() throws Exception{
-        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage"));
+        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
                 {
                 "isbn": "1d",
                 "title": "Updated Book",
                 "author": "Updated Author",
                 "image": "UpdatedImage"
+                "favorite":"false"
                 }
                 """;
         mockMvc.perform(put("/api/book/"+existintBook.isbn())
@@ -96,13 +97,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     void updateBook_ShouldNotUpdateBook() throws Exception{
-        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage"));
+        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
                 {
                 "isbn": "1b",
                 "title": "Updated Book",
                 "author": "Updated Author",
-                "image": "UpdatedImage"
+                "image": "UpdatedImage",
+                "favorite":"false"
                 }
                 """;
         mockMvc.perform(put("/api/book/"+existintBook.isbn())
@@ -114,14 +116,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                                     "isbn": "1d",
                                     "title": "Updated Book",
                                     "author": "Updated Author",
-                                    "image": "UpdatedImage"
+                                    "image": "UpdatedImage",
+                                    "Favorite": false
                                 }
                 """));
     }
 
     @Test
     void deleteBook_ShouldDeleteBook() throws Exception{
-        Book book = bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image"));
+        Book book = bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image",false));
         mockMvc.perform(delete("/api/book/1e"))
                 .andExpect(status().isOk());
 

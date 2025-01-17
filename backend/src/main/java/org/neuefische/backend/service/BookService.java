@@ -1,7 +1,6 @@
 package org.neuefische.backend.service;
 
 import org.neuefische.backend.model.Book;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +23,13 @@ public class BookService {
     public Book getBookById(String id) {
         return bookRepo.findById(id).orElseThrow();
     }
-    public Book addBook(Book book) {
+    public List <Book> getBookByFavorite(Boolean favorite) {
+        return bookRepo.getBookByFavorite(favorite);
+    }
+    public Book addBook(Book book)  {
+        if(book.title().isEmpty()||book.title().isBlank()){
+
+        }
 
         return  bookRepo.save(book);
     }
@@ -36,4 +41,5 @@ public class BookService {
     public void deleteBook(String id) {
          bookRepo.deleteById(id);
     }
+
 }

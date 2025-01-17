@@ -2,11 +2,17 @@ import {FormEvent, useState} from "react";
 import axios from "axios";
 
 export default function BookForm({fetchData}:{fetchData:()=>void}){
+    const [title,setTitle]=useState<string>("")
+    const [author,setAuthor]=useState<string>("")
+    const [image,setImage]=useState<string>("")
+    const [isbn,setIsbn]=useState<string>("")
     function OnSubmit(event:FormEvent<HTMLFormElement>){
         event.preventDefault();
-        axios.post("/api/book",{title:title, author: author, image: image, isbn: isbn}).then(fetchData
+        axios.post("/api/book",{title:title, author: author, image: image, isbn: isbn, favorite: false}).then(
+            fetchData
         ).catch(error=>console.log(error))
-        OnReset()
+
+    OnReset()
     }
     function OnReset(){
         setIsbn("")
@@ -15,10 +21,7 @@ export default function BookForm({fetchData}:{fetchData:()=>void}){
         setImage("")
 
     }
-    const [title,setTitle]=useState<string>("")
-    const [author,setAuthor]=useState<string>("")
-    const [image,setImage]=useState<string>("")
-    const [isbn,setIsbn]=useState<string>("")
+
 
 
     return(
