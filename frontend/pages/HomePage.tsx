@@ -73,17 +73,17 @@ import axios from "axios";
 
              <div style={styles.content}>
                  <div>
-                     <h2 style={{ color: "darkblue", marginBottom: "1rem" }}>Books</h2>
-                     <BookForm fetchData={fetchData} />
+                     <h2 style={{color: "darkblue", marginBottom: "1rem"}}>Books</h2>
+                     <BookForm fetchData={fetchData}/>
                  </div>
 
                  <div style={styles.galleryContainer}>
-                     <BookGallery books={data} />
+                     <BookGallery books={data}/>
                  </div>
              </div>
          </div>
-)
-    ;
-}
+     )
+         ;
+ }
 
 export default HomePage;

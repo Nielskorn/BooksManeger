@@ -3,13 +3,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {Book} from "../src/types/Book.ts";
 
-function BookDetails() {
-    const { id } = useParams();
-    const [data, setData] = useState<Book>();
-    const navigate = useNavigate();
-    const [title, setTitle] = useState<string>("");
-    const [author, setAuthor] = useState<string>("");
-    const [image, setImage] = useState<string>("");
+
+
 
     const styles = {
         container: {
