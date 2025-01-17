@@ -1,0 +1,124 @@
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
+import {Book} from "../src/types/Book.ts";
+
+
+
+
+    const styles = {
+        container: {
+            padding: "2rem",
+            textAlign: "center",
+            backgroundColor: "white",
+            minHeight: "100vh",
+        },
+        title: {
+            fontSize: "2rem",
+            color: "darkblue",
+            marginBottom: "0.5rem",
+        },
+        image: {
+            width: "300px",
+            height: "auto",
+            borderRadius: "8px",
+            marginBottom: "1.5rem",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        },
+        text: {
+            fontSize: "1.1rem",
+            color: "darkslategray",
+            margin: "0.5rem 0",
+        },
+    };
+
+export default function BookDetails() {
+    const { id } = useParams<{ id: string }>();
+    const [book, setBook] = useState<Book | null>(null);
+    const navigate = useNavigate();
+
+    // for Update
+    const [title, setTitle] = useState<string>("");
+    const [author, setAuthor] = useState<string>("");
+    const [image, setImage] = useState<string>("");
+
+    useEffect(() => {
+        const fetchBook = async () => {
+            try {
+                const response = await axios.get<Book>(`/api/book/${id}`);
+                setBook(response.data);
+                setTitle(response.data.title);
+                setAuthor(response.data.author);
+                setImage(response.data.image);
+            } catch (error) {
+                console.error("Fehler beim Abrufen des Buches:", error);
+                alert("Fehler beim Abrufen des Buches");
+            }
+        };
+
+        fetchBook();
+    }, [id]);
+
+    const deleteBook = async (isbn: string) => {
+        try {
+            await axios.delete(`/api/book/${isbn}`);
+            alert("Buch erfolgreich gelöscht");
+            navigate("/");
+        } catch (error) {
+            console.error("Fehler beim Löschen des Buches:", error);
+            alert("Fehler beim Löschen des Buches");
+        }
+    };
+
+    const updateBook = async () => {
+        const updatedBook = { title, author, image, isbn: id };
+        try {
+            const response = await axios.put<Book>(`/api/book/${id}`, updatedBook);
+            setBook(response.data);
+            alert("Buch erfolgreich aktualisiert");
+        } catch (error) {
+            console.error("Fehler beim Aktualisieren des Buches:", error);
+            alert("Fehler beim Aktualisieren des Buches");
+        }
+    };
+
+    if (!book) {
+        return <div>Buch nicht gefunden!</div>;
+    }
+
+    return (
+        <div style={styles.container}>
+            <h1>Buchdetails</h1>
+            <h2 style={styles.title}>{book.title}</h2>
+            <img src={book.image} alt={book.title} />
+            <p>Author: {book.author}</p>
+            <p>ISBN: {book.isbn}</p>
+
+            <div>
+                <h3>Buch bearbeiten</h3>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        updateBook();
+                    }}
+                >
+                    <label>
+                        Title:
+                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    </label>
+                    <label>
+                        Autor:
+                        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                    </label>
+                    <label>
+                        Bild-URL:
+                        <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+                    </label>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+
+            <button onClick={() => deleteBook(book.isbn)}>Löschen</button>
+        </div>
+    );
+}
