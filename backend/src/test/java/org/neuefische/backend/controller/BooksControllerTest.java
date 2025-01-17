@@ -1,4 +1,4 @@
-package org.neuefische.backend.Controller;
+package org.neuefische.backend.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

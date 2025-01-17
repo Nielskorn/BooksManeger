@@ -1,4 +1,4 @@
-package org.neuefische.backend.Controller;
+package org.neuefische.backend.controller;
 
 
 import org.neuefische.backend.model.Book;
