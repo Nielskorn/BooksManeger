@@ -54,6 +54,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     }
 
     @Test
+    void getAllFavoriteBooks_ShouldReturnfristBook() throws Exception {
+        bookRepo.saveAll(List.of(
+                new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1",true),
+                new Book("1b", "Hamburger Coders 2", "Niels and Emre", "TestImage2",false)
+        ));
+        // Act & Assert: API-Aufruf und Validierung
+        mockMvc.perform(get("/api/book/fav").param("favorite", "true"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                [
+                    {
+                        "isbn": "1a",
+                        "title": "Hamburger Coders",
+                        "author": "Niels and Emre",
+                        "image": "TestImage1",
+                        "favorite": true
+                    }
+                  ]
+                
+                """));
+    }
+
+    @Test
     void getBookById_ShouldReturnBook() throws Exception{
        Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
        mockMvc.perform(get("/api/book/1a"))
