@@ -1,4 +1,4 @@
-import {Book} from "../Book.ts";
+import {Book} from "../types/Book.ts";
 import BookCard from "./BookCard.tsx";
 
 type BookGalleryProps={
