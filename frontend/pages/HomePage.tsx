@@ -7,6 +7,7 @@ import axios from "axios";
  function HomePage() {
      const [data, setData] = useState<Book[]>([]);
 
+
      // Funktion zum Datenholen
      function fetchData() {
          axios.get("/api/book")
@@ -19,8 +20,6 @@ import axios from "axios";
 
              });
      }
-
-
 
      useEffect(() => {
          fetchData();
@@ -37,7 +36,7 @@ import axios from "axios";
     <div>
         <header>
             <h1>Books</h1>
-            <BookForm fetchData={fetchData}/>
+            <BookForm fetchData={fetchData}  />
         </header>
         <div>
             <BookGallery books={data}/>

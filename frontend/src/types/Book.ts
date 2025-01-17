@@ -1,6 +1,6 @@
 export type Book={
     title:string,
-    isbn:number,
+    isbn:string,
     author:string,
     image:string
 }
