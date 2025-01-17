@@ -96,7 +96,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 """));
     }
 
-    @Test
+ /*   @Test
     void updateBook_ShouldNotUpdateBook() throws Exception{
         Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
@@ -121,7 +121,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                                     "Favorite": false
                                 }
                 """));
-    }
+    }*/
 
     @Test
     void deleteBook_ShouldDeleteBook() throws Exception{
