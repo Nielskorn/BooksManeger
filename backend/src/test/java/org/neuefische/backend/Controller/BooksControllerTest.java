@@ -1,6 +1,7 @@
 package org.neuefische.backend.Controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.neuefische.backend.model.Book;
 import org.neuefische.backend.service.BookRepo;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 @SpringBootTest
  class BooksControllerTest {
@@ -25,7 +27,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Autowired
     private BookRepo bookRepo;
+    @Autowired
+    ObjectMapper objectMapper;
 
+    @DirtiesContext
+    @Test
+    void expectSuccessfulPost() throws Exception {
+        String actual = mockMvc.perform(
+                        post("/api/book")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("""
+                                    {"isbn":"1a","title": "Omar", "author": "omar","image": "testImage","favorite": false}
+                                    """)
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                    {
+                      "isbn":"1a",
+                      "title": "Omar",
+                       "author": "omar",
+                       "image": "testImage",
+                       "favorite": false
+                    }
+                    """))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Book actualBook = objectMapper.readValue(actual, Book.class);
+        assertThat(actualBook.isbn())
+                .isNotBlank();
+    }
     @Test
     void getAllBooks_ShouldReturnAllBooks() throws Exception {
         bookRepo.saveAll(List.of(
