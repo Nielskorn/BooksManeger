@@ -77,7 +77,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 "isbn": "1d",
                 "title": "Updated Book",
                 "author": "Updated Author",
-                "image": "UpdatedImage"
+                "image": "UpdatedImage",
                 "favorite":"false"
                 }
                 """;
@@ -91,7 +91,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                                     "title": "Updated Book",
                                     "author": "Updated Author",
                                     "image": "UpdatedImage",
-                                    "favorite":"false"
+                                    "favorite":false
                                 }
                 """));
     }
