@@ -1,11 +1,11 @@
 import BookForm from "../src/Componets/BookForm";
 import BookGallery from "../src/Componets/BookGallery";
-import { useEffect, useState } from "react";
-import { Book } from "../src/types/Book.ts";
+import {useEffect, useState} from "react";
+import {Book} from "../src/types/Book.ts";
 import axios from "axios";
 
-function HomePage() {
-    const [data, setData] = useState<Book[]>([]);
+ function HomePage() {
+     const [data, setData] = useState<Book[]>([]);
 
      // Funktion zum Datenholen
      function fetchData() {

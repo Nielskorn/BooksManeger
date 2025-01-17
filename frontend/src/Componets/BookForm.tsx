@@ -22,12 +22,10 @@ export default function BookForm({fetchData}:{fetchData:()=>void}){
 
     }
 
-
-
     return(
         <>
             <form onSubmit={OnSubmit} onReset={OnReset}>
-                <label> Titel:
+                <label> Title:
                     <input type={"text"} value={title} onChange={event => {
                         setTitle(event.target.value)
                     }}/>

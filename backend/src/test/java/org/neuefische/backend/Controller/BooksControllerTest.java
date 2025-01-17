@@ -111,7 +111,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     @Test
     void getBookById_ShouldReturnBook() throws Exception{
        Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
-       mockMvc.perform(get("/api/book/1a"))
+       mockMvc.perform(get("/api/book/" +book.isbn()))
                .andExpect(status().isOk())
                .andExpect(content().json("""
                        {

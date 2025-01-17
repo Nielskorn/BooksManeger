@@ -4,8 +4,6 @@ import axios from "axios";
 import {Book} from "../src/types/Book.ts";
 
 
-
-
     const styles = {
         container: {
             padding: "2rem",
@@ -87,7 +85,7 @@ export default function BookDetails() {
     }
 
     return (
-        <div style={styles.container}>
+        <div>
             <h1>Buchdetails</h1>
             <h2 style={styles.title}>{book.title}</h2>
             <img src={book.image} alt={book.title} />
