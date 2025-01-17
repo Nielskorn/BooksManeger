@@ -24,9 +24,7 @@ public class BookService {
         return bookRepo.getBookByFavorite(favorite);
     }
     public Book addBook(Book book)  {
-        if(book.title().isEmpty()||book.title().isBlank()){
-
-        }
+       // if(book.title().isEmpty()||book.title().isBlank()){//}
 
         return  bookRepo.save(book);
     }
