@@ -1,7 +1,41 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import { Book } from "../src/types/Book.ts";
+import {Book} from "../src/types/Book.ts";
+
+function BookDetails() {
+    const { id } = useParams();
+    const [data, setData] = useState<Book>();
+    const navigate = useNavigate();
+    const [title, setTitle] = useState<string>("");
+    const [author, setAuthor] = useState<string>("");
+    const [image, setImage] = useState<string>("");
+
+    const styles = {
+        container: {
+            padding: "2rem",
+            textAlign: "center",
+            backgroundColor: "white",
+            minHeight: "100vh",
+        },
+        title: {
+            fontSize: "2rem",
+            color: "darkblue",
+            marginBottom: "0.5rem",
+        },
+        image: {
+            width: "300px",
+            height: "auto",
+            borderRadius: "8px",
+            marginBottom: "1.5rem",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        },
+        text: {
+            fontSize: "1.1rem",
+            color: "darkslategray",
+            margin: "0.5rem 0",
+        },
+    };
 
 export default function BookDetails() {
     const { id } = useParams<{ id: string }>();
@@ -58,9 +92,9 @@ export default function BookDetails() {
     }
 
     return (
-        <div>
+        <div style={styles.container}>
             <h1>Buchdetails</h1>
-            <h2>{book.title}</h2>
+            <h2 style={styles.title}>{book.title}</h2>
             <img src={book.image} alt={book.title} />
             <p>Author: {book.author}</p>
             <p>ISBN: {book.isbn}</p>
