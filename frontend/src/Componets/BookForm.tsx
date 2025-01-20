@@ -10,7 +10,7 @@ export default function BookForm({fetchData}:{fetchData:()=>void}){
         event.preventDefault();
         axios.post("/api/book",{title:title, author: author, image: image, isbn: isbn, favorite: false}).then(
             fetchData
-        ).catch(error=>console.log(error))
+        ).catch(error=>{console.log(error); alert(error.response.data.message)})
 
     OnReset()
     }
