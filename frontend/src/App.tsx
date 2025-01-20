@@ -4,11 +4,10 @@ import './style.css'
 
 import HomePage from "../pages/HomePage.tsx";
 import FavoritesPage from "../pages/FavoritesPages.tsx";
-import BookDetails from "../pages/BookDetails.tsx";
-//import NavBar from "./Componets/NavBar.tsx";
 import {Link, Route, Routes} from "react-router-dom";
 import Manage from "../pages/Manage.tsx";
-// das ist ein komentar import AuthorPage from "../pages/AuthorPage.tsx";
+import BookDetails from "../pages/BookDetails.tsx";
+
 
 // Importiere die neuen Seiten
 
@@ -24,30 +23,24 @@ function App() {
                     <Link to="/manage">Manage</Link>
                 </nav>
             </header>
+
             <main className="container">
-                {/* Routen-Setup */}
                 <Routes>
-                    {/* Startseite */}
                     <Route path="/" element={<HomePage/>}/>
-
-                    {/* Favoriten */}
                     <Route path="/favorites" element={<FavoritesPage/>}/>
-
-                    {/*AuthorPage
-                  <Route> path="/author" element={<AuthorPage author={"test"}/>} </Route>
-                 */}
                     <Route path="/manage" element={<Manage/>}/>
-
-
-                    {/* Buchdetails */}
                     <Route path="/book/:id" element={<BookDetails/>}/>
                 </Routes>
             </main>
+
             <footer>
                 <p>&copy; 2025 Book Library. All rights reserved.</p>
             </footer>
         </>
-    );
+
+
+)
+    ;
 }
 
 export default App;
