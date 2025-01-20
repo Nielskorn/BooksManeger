@@ -5,6 +5,7 @@ import org.neuefische.backend.execaptions.NoIsbnExecaption;
 import org.neuefische.backend.execaptions.NoTitleExecaption;
 
 import org.neuefische.backend.model.Book;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,16 +33,17 @@ public class BookService {
         if(book.title().isEmpty()||book.title().isBlank()){
             throw new NoTitleExecaption();
         }
-        //TODO Add way to get Isbn over Title per 3deParty api or add generation by service
+
         if(book.isbn().isEmpty()||book.isbn().isBlank()){
             throw new NoIsbnExecaption();
         }
         if(book.image().isEmpty()||book.image().isBlank()){
-           book= getCoverimage(book);
+           book= getCoverImage(book);
         }
         return  bookRepo.save(book);
     }
-    public Book getCoverimage(Book book) {
+
+    public Book getCoverImage(@NonNull Book book) {
       String coverUrl ="https://covers.openlibrary.org/b/isbn/"+book.isbn()+"-M.jpg";
       return  new Book(book.isbn(), book.title(),book.author(),coverUrl,book.favorite());
     }
