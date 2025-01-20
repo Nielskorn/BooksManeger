@@ -1,5 +1,9 @@
 package org.neuefische.backend.service;
 
+
+import org.neuefische.backend.execaptions.NoIsbnExecaption;
+import org.neuefische.backend.execaptions.NoTitleExecaption;
+
 import org.neuefische.backend.model.Book;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +27,15 @@ public class BookService {
     public List <Book> getBookByFavorite(Boolean favorite) {
         return bookRepo.getBookByFavorite(favorite);
     }
-    public Book addBook(Book book)  {
-       // if(book.title().isEmpty()||book.title().isBlank()){//}
-
+    public Book addBook(Book book) throws
+            NoTitleExecaption, NoIsbnExecaption {
+        if(book.title().isEmpty()||book.title().isBlank()){
+            throw new NoTitleExecaption();
+        }
+        //TODO Add way to get Isbn over Title per 3deParty api or add generation by service
+        if(book.isbn().isEmpty()||book.isbn().isBlank()){
+            throw new NoIsbnExecaption();
+        }
         return  bookRepo.save(book);
     }
 
