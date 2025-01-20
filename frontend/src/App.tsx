@@ -1,11 +1,12 @@
 
 import './App.css';
+import './style.css'
 
 import HomePage from "../pages/HomePage.tsx";
 import FavoritesPage from "../pages/FavoritesPages.tsx";
-import BookDetails from "../pages/BookDetails.tsx";
-import NavBar from "./Componets/NavBar.tsx";
-import {Route, Routes} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
+import Manage from "../pages/Manage.tsx";
+
 
 // Importiere die neuen Seiten
 
@@ -14,22 +15,30 @@ function App() {
     return (
         <>
             <header>
-               <NavBar/>
+                <h1>Book Library</h1>
+                <nav>
+                    <Link to="/">Home</Link>
+                    <Link to="/favorites">Favorites</Link>
+                    <Link to="/manage">Manage</Link>
+                </nav>
             </header>
 
-            {/* Routen-Setup */}
-            <Routes>
-                {/* Startseite */}
-                <Route path="/" element={<HomePage />} />
+            <main className="container">
+                <Routes>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/favorites" element={<FavoritesPage/>}/>
+                    <Route path="/manage" element={<Manage/>}/>
+                </Routes>
+            </main>
 
-                {/* Favoriten */}
-                <Route path="/favorites" element={<FavoritesPage />} />
-
-                {/* Buchdetails */}
-                <Route path="/book/:id" element={<BookDetails  />} />
-            </Routes>
+            <footer>
+                <p>&copy; 2025 Book Library. All rights reserved.</p>
+            </footer>
         </>
-    );
+
+
+)
+    ;
 }
 
 export default App;

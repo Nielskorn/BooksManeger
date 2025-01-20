@@ -1,5 +1,6 @@
 import {Book} from "../types/Book.ts";
 import BookCard from "./BookCard.tsx";
+import 'ansi-styles'
 
 type BookGalleryProps={
     books:Book[]
