@@ -1,10 +1,14 @@
 package org.neuefische.backend.controller;
 
 
+import org.neuefische.backend.execaptions.NoIsbnExecaption;
+import org.neuefische.backend.execaptions.NoTitleExecaption;
+
 import org.neuefische.backend.model.Book;
 import org.neuefische.backend.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.util.List;
 
 @RequestMapping("/api/book")
@@ -21,7 +25,7 @@ public class BookController {
 
 
     @PostMapping
-public Book addBook (@RequestBody Book book){
+public Book addBook (@RequestBody Book book) throws NoTitleExecaption, NoIsbnExecaption {
     return bookService.addBook(book);
 }
 
@@ -38,6 +42,10 @@ bookService.getAllBooks();
 public List <Book> getBooksByFavorite (@RequestParam (value = "favorite" )boolean favorite){
         return bookService.getBookByFavorite(favorite);
 }
+@GetMapping("/author")
+public List <Book> getBooksByAuthor (@RequestParam (value = "author" )String author){
+        return bookService.getBooksByAuthor(author);
+}
 
 @PutMapping("/{id}")
 public Book updateBook(@PathVariable String id, @RequestBody Book book){
@@ -45,7 +53,9 @@ public Book updateBook(@PathVariable String id, @RequestBody Book book){
 }
 
 @DeleteMapping("/{id}")
+
     public void deleteBook(@PathVariable String id){
+        System.out.println("Delete methode");
     bookService.deleteBook(id);
 }
 }

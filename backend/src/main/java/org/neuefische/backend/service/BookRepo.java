@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface BookRepo extends MongoRepository<Book, String> {
 List<Book> getBookByFavorite(Boolean favorite);
+List<Book> getBookByAuthor(String author);
 }

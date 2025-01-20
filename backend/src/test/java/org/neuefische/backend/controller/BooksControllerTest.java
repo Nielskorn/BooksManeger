@@ -111,7 +111,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     @Test
     void getBookById_ShouldReturnBook() throws Exception{
        Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
-       mockMvc.perform(get("/api/book/1a"))
+       mockMvc.perform(get("/api/book/" +book.isbn()))
                .andExpect(status().isOk())
                .andExpect(content().json("""
                        {
@@ -151,7 +151,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 """));
     }
 
- /*   @Test
+ /* ingore for sonar  @Test
     void updateBook_ShouldNotUpdateBook() throws Exception{
         Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
@@ -180,7 +180,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
     @Test
     void deleteBook_ShouldDeleteBook() throws Exception{
-        Book book = bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image",false));
+        bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image",false));
         mockMvc.perform(delete("/api/book/1e"))
                 .andExpect(status().isOk());
 
@@ -189,6 +189,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
     }
+    @Test
+    @DirtiesContext
+    void getBooksByAuthor_ShouldReturnAllBooks() throws Exception {
+        bookRepo.saveAll(List.of(
+                new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1",true),
+                new Book("1b", "Hamburger Coders 2", "Niels", "TestImage2",false)
+        ));
+        // Act & Assert: API-Aufruf und Validierung
+        mockMvc.perform(get("/api/book/author").param("author", "Niels and Emre"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                [
+                    {
+                        "isbn": "1a",
+                        "title": "Hamburger Coders",
+                        "author": "Niels and Emre",
+                        "image": "TestImage1",
+                        "favorite": true
+                    }
+                  ]
+                
+                """));
+    }
+
 
 
 }

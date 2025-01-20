@@ -4,8 +4,6 @@ import axios from "axios";
 import {Book} from "../src/types/Book.ts";
 
 
-
-
     const styles = {
         container: {
             padding: "2rem",
@@ -32,9 +30,11 @@ import {Book} from "../src/types/Book.ts";
         },
     };
 
+
 export default function BookDetails() {
     const { id } = useParams<{ id: string }>();
     const [book, setBook] = useState<Book | null>(null);
+    /*const [allbooks, setBooks] = useState<Book[]>([]);*/
     const navigate = useNavigate();
 
     // for Update
@@ -87,7 +87,7 @@ export default function BookDetails() {
     }
 
     return (
-        <div style={styles.container}>
+        <div>
             <h1>Buchdetails</h1>
             <h2 style={styles.title}>{book.title}</h2>
             <img src={book.image} alt={book.title} />
@@ -95,6 +95,7 @@ export default function BookDetails() {
             <p>ISBN: {book.isbn}</p>
 
             <div>
+
                 <h3>Buch bearbeiten</h3>
                 <form
                     onSubmit={(e) => {
