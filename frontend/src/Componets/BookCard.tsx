@@ -9,17 +9,18 @@ export default function BookCard(book: Book) {
 
 
     function navigateToDetailspage() {
-        navigate("/book/" + book.isbn);
+        navigate("/book/"+book.isbn );
     }
 
-    function deleteBook() {
-        axios.delete(`/api/book/${book.isbn}`)
-            .then(() => alert("Buch erfolgreich gelöscht"))
+    function deleteBook()  {
+        axios.delete("/api/book/"+book.isbn )
+            .then(() => {alert("Buch erfolgreich gelöscht")
+                window.location.reload()})
             .catch((error) => console.error("Fehler beim Löschen:", error));
     }
 
     return (
-        <>
+        <div className="BookCard">
             <div
                 onMouseEnter={() => setShowActions(true)}
                 onMouseLeave={() => setShowActions(false)}
@@ -46,7 +47,7 @@ export default function BookCard(book: Book) {
             </div>
 
 
-        </>
+        </div>
     )
         ;
 }

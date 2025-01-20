@@ -6,9 +6,11 @@ import {Book} from "../src/types/Book";
 
 
 
+
 export default function BookDetails() {
     const { id } = useParams<{ id: string }>();
     const [book, setBook] = useState<Book | null>(null);
+    /*const [allbooks, setBooks] = useState<Book[]>([]);*/
     const navigate = useNavigate();
 
     // for Update
@@ -71,6 +73,7 @@ export default function BookDetails() {
             <p>ISBN: {book.isbn}</p>
 
             <div>
+
                 <h3>Buch bearbeiten</h3>
                 <form
                     onSubmit={(e) => {

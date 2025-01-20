@@ -8,6 +8,7 @@ import org.neuefische.backend.model.Book;
 import org.neuefische.backend.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.util.List;
 
 @RequestMapping("/api/book")
@@ -52,7 +53,9 @@ public Book updateBook(@PathVariable String id, @RequestBody Book book){
 }
 
 @DeleteMapping("/{id}")
+
     public void deleteBook(@PathVariable String id){
+        System.out.println("Delete methode");
     bookService.deleteBook(id);
 }
 }
