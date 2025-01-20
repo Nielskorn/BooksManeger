@@ -41,6 +41,10 @@ bookService.getAllBooks();
 public List <Book> getBooksByFavorite (@RequestParam (value = "favorite" )boolean favorite){
         return bookService.getBookByFavorite(favorite);
 }
+@GetMapping("/author")
+public List <Book> getBooksByAuthor (@RequestParam (value = "author" )String author){
+        return bookService.getBooksByAuthor(author);
+}
 
 @PutMapping("/{id}")
 public Book updateBook(@PathVariable String id, @RequestBody Book book){

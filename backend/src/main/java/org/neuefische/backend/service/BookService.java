@@ -36,7 +36,14 @@ public class BookService {
         if(book.isbn().isEmpty()||book.isbn().isBlank()){
             throw new NoIsbnExecaption();
         }
+        if(book.image().isEmpty()||book.image().isBlank()){
+           book= getCoverimage(book);
+        }
         return  bookRepo.save(book);
+    }
+    public Book getCoverimage(Book book) {
+      String coverUrl ="https://covers.openlibrary.org/b/isbn/"+book.isbn()+"-M.jpg";
+      return  new Book(book.isbn(), book.title(),book.author(),coverUrl,book.favorite());
     }
 
     public Book updateBook(Book book) {
@@ -47,4 +54,7 @@ public class BookService {
          bookRepo.deleteById(id);
     }
 
+    public List<Book> getBooksByAuthor(String author) {
+        return bookRepo.getBookByAuthor(author);
+    }
 }
