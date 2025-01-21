@@ -53,7 +53,6 @@ public class BookService {
     }
 
     public void deleteBook(String id) {
-        System.out.println("My Service delete");
          bookRepo.deleteById(id);
     }
 
