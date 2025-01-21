@@ -1,4 +1,5 @@
 export type Book={
+    liked: ;
     title:string,
     isbn:string,
     author:string,

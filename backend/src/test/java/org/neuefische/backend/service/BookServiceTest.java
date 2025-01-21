@@ -27,10 +27,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
     }
     @Test
     void imageurlCreation(){
+
+
+    }
+    @Test
+    void addedBook_shoudImageCreation() throws NoIsbnExecaption, NoTitleExecaption {
         Book test =new Book("9783442457397", "Der Zeitdieb", "Terry Pratchett", "",false);
         Book expected =new Book ("9783442457397", "Der Zeitdieb", "Terry Pratchett", "https://covers.openlibrary.org/b/isbn/9783442457397-M.jpg",false) ;
-        Book actual= bookService.getCoverImage(test);
+        Book actual= bookService.addBook(test);
         assertEquals(actual.image(),(expected.image()));
-
     }
 }
