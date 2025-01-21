@@ -62,6 +62,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .isNotBlank();
     }
     @Test
+    @DirtiesContext
     void getAllBooks_ShouldReturnAllBooks() throws Exception {
         bookRepo.saveAll(List.of(
                 new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1",false),
@@ -89,6 +90,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void getAllFavoriteBooks_ShouldReturnfristBook() throws Exception {
         bookRepo.saveAll(List.of(
                 new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1",true),
@@ -112,6 +114,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void getBookById_ShouldReturnBook() throws Exception{
        Book book =bookRepo.save (new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
        mockMvc.perform(get("/api/book/" +book.isbn()))
@@ -128,8 +131,9 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void updateBook_ShouldUpdateBook() throws Exception{
-        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
+        Book existintBook =bookRepo.save(new Book("1d", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
                 {
                 "isbn": "1d",
@@ -176,6 +180,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void deleteBook_ShouldDeleteBook() throws Exception{
         bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image",false));
         mockMvc.perform(delete("/api/book/1e"))
