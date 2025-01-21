@@ -8,7 +8,11 @@ import './Book.css'
 export default function BookCard(book: Book) {
     const navigate = useNavigate();
     const [showActions, setShowActions] = useState(false);
-    const [isLiked, setIsLiked] = useState(book.liked); // Annahme: `book.liked` ist ein boolean
+    const [isLiked, setIsLiked] = useState<boolean>(book.favorite);
+    const [author, setAuthor] = useState(book.author)
+    const [image, setImage] = useState(book.image)
+    const [title, setTitle] = useState(book.title)
+    const [isbn, setIsbn] = useState(book.isbn)// Annahme: `book.liked` ist ein boolean
 
     function navigateToDetailspage() {
         navigate("/book/" + book.isbn);
@@ -24,14 +28,17 @@ export default function BookCard(book: Book) {
     }
 
     function toggleLike() {
-        axios.post(`/api/book/${book.isbn}/like`, { liked: !isLiked })
+        setIsLiked(!isLiked);
+        const ubook: Book = {isbn: isbn, title: title, author: author, image: image, favorite: isLiked}
+
+        axios.put(`/api/book/${book.isbn}`, ubook)
             .then(() => {
-                setIsLiked(!isLiked);
+
+
                 alert(isLiked ? "Like entfernt" : "Buch geliked");
             })
             .catch((error) => console.error("Fehler beim Liken:", error));
     }
-
 
     return (
         <>
@@ -48,45 +55,40 @@ export default function BookCard(book: Book) {
                 }}
             >
                 <h2>{book.title}</h2>
-                <img src={book.image} alt={book.title} style={{ width: "150px", height: "auto" }} />
-                <img src={book.image} alt={book.title} />
+                <img src={book.image} alt={book.title}/>
                 <p>Author: {book.author}</p>
                 <p>ISBN: {book.isbn}</p>
 
                 {showActions && (
-                    <div style={{ marginTop: "1rem" }}>
-                    <div className="actions">
-                        <button onClick={navigateToDetailspage}>Bearbeiten</button>
-                        <button onClick={deleteBook} style={{ backgroundColor: "red" }}>Löschen</button>
-                        <button
-                            onClick={toggleLike}
-                            style={{
-                                backgroundColor: "transparent",
-                                border: "none",
-                                cursor: "pointer",
-                                color: isLiked ? "red" : "gray",
-                                fontSize: "1.5rem",
-                            }}
-                        >
-                            {isLiked ? "❤️" : "🤍"}
-                        </button>
-                        <button onClick={deleteBook}>Löschen</button>
+                    <div style={{marginTop: "1rem"}}>
+                        <div className="actions">
+                            <button onClick={navigateToDetailspage}>Bearbeiten</button>
+                            <button onClick={deleteBook} style={{backgroundColor: "red"}}>Löschen</button>
+                            <button
+                                onClick={toggleLike}
+                                style={{
+                                    backgroundColor: "transparent",
+                                    border: "none",
+                                    cursor: "pointer",
+                                    color: isLiked ? "red" : "gray",
+                                    fontSize: "1.5rem",
+                                }}
+                            >
+                                {isLiked ? "❤️" : "🤍"}
+                            </button>
+
+                        </div>
                     </div>
                 )}
-            </div>
-<<<<<<< HEAD
-        </>
-    );
-}
-=======
-
 
 
             </div>
-
-
-
-
         </>
     );
+
 }
+
+
+
+
+
