@@ -7,6 +7,7 @@ import BookForm from "../src/Componets/BookForm.tsx";
 
 
 
+
 function ManagePage() {
    /* const { id } = useParams<{ id: string }>();
     const [book, setBook] = useState<Book | null>(null);
@@ -70,9 +71,9 @@ function ManagePage() {
     }
 
     return (
-        <div>
+        <div >
 
-            <div>
+            <div className="book-gallery">
                 <BookGallery books={allbooks}/>
 
             </div>

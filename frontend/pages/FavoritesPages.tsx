@@ -1,5 +1,4 @@
 import {Book} from "../src/types/Book.ts";
-//import BookCard from "../src/Componets/BookCard.tsx";
 import BookGallery from "../src/Componets/BookGallery.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -34,10 +33,10 @@ function FavoritesPage() {
 
 
     return (
-        <div >
+        <div className="homepage-container" >
             <h1 >Favoriten</h1>
             <p >Hier sind deine Lieblingsbücher!</p>
-     <BookGallery books={data}></BookGallery>
+            <BookGallery books={data}></BookGallery>
         </div>
 );
 }
