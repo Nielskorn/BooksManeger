@@ -3,6 +3,7 @@ package org.neuefische.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.neuefische.backend.execaptions.NoSuchIsbn;
 import org.neuefische.backend.model.Book;
 import org.neuefische.backend.service.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -151,7 +154,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 """));
     }
 
- /* ingore for sonar  @Test
+  @Test
     void updateBook_ShouldNotUpdateBook() throws Exception{
         Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
@@ -166,17 +169,11 @@ import static org.assertj.core.api.Assertions.assertThat;
         mockMvc.perform(put("/api/book/"+existintBook.isbn())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updateBook))
-                .andExpect(status().isOk())
-                .andExpect(content().json("""
-                 {
-                                    "isbn": "1d",
-                                    "title": "Updated Book",
-                                    "author": "Updated Author",
-                                    "image": "UpdatedImage",
-                                    "Favorite": false
-                                }
-                """));
-    }*/
+                .andExpect(status().is5xxServerError()).andExpect(result -> assertInstanceOf(NoSuchIsbn.class, result.getResolvedException())).andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("No such ISBN")));
+
+
+
+    }
 
     @Test
     void deleteBook_ShouldDeleteBook() throws Exception{

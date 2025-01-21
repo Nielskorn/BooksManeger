@@ -1,6 +1,7 @@
 package org.neuefische.backend.controller;
 
 import org.neuefische.backend.execaptions.NoIsbnExecaption;
+import org.neuefische.backend.execaptions.NoSuchIsbn;
 import org.neuefische.backend.execaptions.NoTitleExecaption;
 import org.neuefische.backend.model.Book;
 import org.neuefische.backend.service.BookService;
@@ -42,7 +43,7 @@ public List <Book> getBooksByAuthor (@RequestParam (value = "author" )String aut
 }
 
 @PutMapping("/{id}")
-public Book updateBook(@PathVariable String id, @RequestBody Book book){
+public Book updateBook(@PathVariable String id, @RequestBody Book book) throws NoSuchIsbn {
     return bookService.updateBook(book);
 }
 
