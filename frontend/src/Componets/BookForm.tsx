@@ -1,5 +1,7 @@
 import {FormEvent, useState} from "react";
 import axios from "axios";
+import './Book.css'
+
 
 export default function BookForm({fetchData}:{fetchData:()=>void}){
     const [title,setTitle]=useState<string>("")

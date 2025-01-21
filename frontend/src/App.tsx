@@ -1,6 +1,6 @@
 
 import './App.css';
-import './style.css'
+
 
 import HomePage from "../pages/HomePage.tsx";
 import FavoritesPage from "../pages/FavoritesPages.tsx";

@@ -65,7 +65,7 @@ export default function BookDetails() {
     }
 
     return (
-        <div>
+        <div className="book-card">
             <h1>Buchdetails</h1>
             <h2>{book.title}</h2>
             <img src={book.image} alt={book.title} />
@@ -83,21 +83,22 @@ export default function BookDetails() {
                 >
                     <label>
                         Title:
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                     </label>
                     <label>
                         Autor:
-                        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)}/>
                     </label>
                     <label>
                         Bild-URL:
-                        <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+                        <input type="text" value={image} onChange={(e) => setImage(e.target.value)}/>
                     </label>
                     <button type="submit">Update</button>
+                    <button onClick={() => deleteBook(book.isbn)}>Löschen</button>
                 </form>
             </div>
 
-            <button onClick={() => deleteBook(book.isbn)}>Löschen</button>
+
         </div>
     );
 }

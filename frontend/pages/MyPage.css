@@ -1,0 +1,17 @@
+/* HomePage Styles */
+.homepage-container {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.homepage-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.homepage-header p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+}

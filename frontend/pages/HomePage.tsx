@@ -2,6 +2,10 @@ import BookGallery from "../src/Componets/BookGallery";
 import {useEffect, useState} from "react";
 import {Book} from "../src/types/Book.ts";
 import axios from "axios";
+import './MyPage.css'
+
+
+
 
 
  function HomePage() {
@@ -29,8 +33,8 @@ import axios from "axios";
 
 
      return (
-         <div>
-             <div>
+         <div className="homepage-container">
+             <div className="homepage-header">
                  <h1>Willkommen in der Book Library!</h1>
                  <p >
                      Hier kannst du Bücher durchsuchen und deine Favoriten speichern.
@@ -40,7 +44,7 @@ import axios from "axios";
              <div>
 
 
-                 <div>
+                 <div className="book-gallery">
                      <BookGallery books={data}/>
                  </div>
              </div>

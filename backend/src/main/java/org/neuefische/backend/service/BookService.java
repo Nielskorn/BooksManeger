@@ -28,6 +28,7 @@ public class BookService {
     public List <Book> getBookByFavorite(Boolean favorite) {
         return bookRepo.getBookByFavorite(favorite);
     }
+
     public Book addBook(Book book) throws
             NoTitleExecaption, NoIsbnExecaption {
         if(book.title().isEmpty()||book.title().isBlank()){
