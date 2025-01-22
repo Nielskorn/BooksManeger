@@ -71,15 +71,15 @@ function ManagePage() {
     }
 
     return (
-        <div >
+        <div>
+
+            <div>
+                <BookForm fetchData={fetchData}/>
+            </div>
 
             <div className="book-gallery">
                 <BookGallery books={allbooks}/>
 
-            </div>
-
-            <div>
-                <BookForm fetchData={fetchData}/>
             </div>
 
 
