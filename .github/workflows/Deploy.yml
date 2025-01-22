@@ -74,7 +74,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}//book-lib:latest # Replace 'project' with your repo name
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/book-lib:latest # Replace 'project' with your repo name
           context: .
           
   deploy:
