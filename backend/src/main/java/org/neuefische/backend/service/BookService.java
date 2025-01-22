@@ -2,6 +2,7 @@ package org.neuefische.backend.service;
 
 
 import org.neuefische.backend.execaptions.NoIsbnExecaption;
+import org.neuefische.backend.execaptions.NoSuchIsbn;
 import org.neuefische.backend.execaptions.NoTitleExecaption;
 
 import org.neuefische.backend.model.Book;
@@ -49,12 +50,16 @@ public class BookService {
       return  new Book(book.isbn(), book.title(),book.author(),coverUrl,book.favorite());
     }
 
-    public Book updateBook(Book book) {
-        return bookRepo.save(book);
+    public Book updateBook( Book book) throws NoSuchIsbn {
+        if(bookRepo.findById(book.isbn()).isPresent()){
+            return bookRepo.save(book);
+        }else
+            throw new NoSuchIsbn(book.isbn());
+
+
     }
 
     public void deleteBook(String id) {
-        System.out.println("My Service delete");
          bookRepo.deleteById(id);
     }
 
