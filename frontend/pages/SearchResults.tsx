@@ -2,7 +2,8 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BookGallery from "../src/Componets/BookGallery";
-import './MyPage.css'
+import './SearchResults.css'
+
 
 
 export default function SearchResults() {
@@ -22,7 +23,7 @@ export default function SearchResults() {
     }, [title]);
 
     return (
-        <div className="book-gallery" >
+        <div className="" >
             <h1>Suchergebnisse für "{title}"</h1>
 
             {books.length > 0 ? (
