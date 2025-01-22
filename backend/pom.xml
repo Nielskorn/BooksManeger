@@ -115,7 +115,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>app.jar</finalName>
+        <finalName>app</finalName>
     </build>
 
 </project>
