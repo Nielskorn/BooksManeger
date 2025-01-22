@@ -54,10 +54,10 @@ public Book updateBook(@PathVariable String id, @RequestBody Book book) throws N
 
 
     @DeleteMapping("/{id}")
-  public void deleteBook(@PathVariable String id){
-    bookService.deleteBook(id);
+  public void deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
 
-
+    }
 
     @GetMapping("/search")
     public List<Book> getBooksByTitle(@RequestParam String title) {
