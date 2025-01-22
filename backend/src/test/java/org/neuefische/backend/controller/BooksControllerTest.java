@@ -3,6 +3,7 @@ package org.neuefische.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.neuefische.backend.execaptions.NoSuchIsbn;
 import org.neuefische.backend.model.Book;
 import org.neuefische.backend.service.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -61,6 +64,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .isNotBlank();
     }
     @Test
+    @DirtiesContext
     void getAllBooks_ShouldReturnAllBooks() throws Exception {
         bookRepo.saveAll(List.of(
                 new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1" ,false),
@@ -89,6 +93,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void getAllFavoriteBooks_ShouldReturnfristBook() throws Exception {
         bookRepo.saveAll(List.of(
                 new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage1" ,true),
@@ -112,6 +117,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void getBookById_ShouldReturnBook() throws Exception{
        Book book =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage", false));
         mockMvc.perform(get("/api/book/" + book.isbn()))
@@ -129,8 +135,11 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Test
+    @DirtiesContext
     void updateBook_ShouldUpdateBook() throws Exception{
-        Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels  and Emre", "TestImage",false));
+
+        Book existintBook =bookRepo.save(new Book("1d", "Hamburger Coders", "Niels and Emre", "TestImage",false));
+
         String updateBook= """
                 {
                 "isbn": "1d",
@@ -161,7 +170,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 """));
     }
 
- /* ingore for sonar  @Test
+  @Test
     void updateBook_ShouldNotUpdateBook() throws Exception{
         Book existintBook =bookRepo.save(new Book("1a", "Hamburger Coders", "Niels and Emre", "TestImage",false));
         String updateBook= """
@@ -176,19 +185,15 @@ import static org.assertj.core.api.Assertions.assertThat;
         mockMvc.perform(put("/api/book/"+existintBook.isbn())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updateBook))
-                .andExpect(status().isOk())
-                .andExpect(content().json("""
-                 {
-                                    "isbn": "1d",
-                                    "title": "Updated Book",
-                                    "author": "Updated Author",
-                                    "image": "UpdatedImage",
-                                    "Favorite": false
-                                 }
-                """));
-    }*/
+                .andExpect(status().is5xxServerError()).andExpect(result -> assertInstanceOf(NoSuchIsbn.class, result.getResolvedException())).andExpect(result -> assertTrue(result.getResolvedException().getMessage().contains("No such ISBN")));
+
+
+
+    }
+
 
     @Test
+    @DirtiesContext
     void deleteBook_ShouldDeleteBook() throws Exception{
         bookRepo.save(new Book("1e", "Book to Delete", "Author", "Image",false));
         mockMvc.perform(delete("/api/book/1e"))

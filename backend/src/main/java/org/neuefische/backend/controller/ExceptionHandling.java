@@ -20,5 +20,10 @@ public class ExceptionHandling {
         return new ErrorMessage( exception.getMessage(), Instant.now());
     }
 
+    @ExceptionHandler(org.neuefische.backend.execaptions.NoSuchIsbn.class)
+    public ErrorMessage handelNoSuchIsbnExecaption(Exception exception){
+        return new ErrorMessage( exception.getMessage(), Instant.now());
+    }
+
 
 }
