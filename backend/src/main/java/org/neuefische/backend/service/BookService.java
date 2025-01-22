@@ -61,4 +61,8 @@ public class BookService {
     public List<Book> getBooksByAuthor(String author) {
         return bookRepo.getBookByAuthor(author);
     }
+
+    public List<Book> searchBooksByTitle(String title) {
+        return bookRepo.findByTitleContainingIgnoreCase(title);
+    }
 }

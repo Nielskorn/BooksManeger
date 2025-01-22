@@ -11,4 +11,5 @@ import java.util.List;
 public interface BookRepo extends MongoRepository<Book, String> {
 List<Book> getBookByFavorite(Boolean favorite);
 List<Book> getBookByAuthor(String author);
+List<Book> findByTitleContainingIgnoreCase(String title);
 }

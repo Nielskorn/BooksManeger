@@ -17,7 +17,7 @@ import java.util.List;
 
 
 public class BookController {
- private final BookService bookService;
+    private final BookService bookService;
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
@@ -25,37 +25,47 @@ public class BookController {
 
 
     @PostMapping
-public Book addBook (@RequestBody Book book) throws NoTitleExecaption, NoIsbnExecaption {
-    return bookService.addBook(book);
-}
+    public Book addBook(@RequestBody Book book) throws NoTitleExecaption, NoIsbnExecaption {
+        return bookService.addBook(book);
+    }
 
-@GetMapping ("/{id}")
-public Book getBookById(@PathVariable String id){
-     return bookService.getBookById(id);
-}
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable String id) {
+        return bookService.getBookById(id);
+    }
 
-@GetMapping
-public List <Book> getAllBooks(){return
-bookService.getAllBooks();
-}
-@GetMapping("/fav")
-public List <Book> getBooksByFavorite (@RequestParam (value = "favorite" )boolean favorite){
+    @GetMapping
+    public List<Book> getAllBooks() {
+        return
+                bookService.getAllBooks();
+    }
+
+    @GetMapping("/fav")
+    public List<Book> getBooksByFavorite(@RequestParam(value = "favorite") boolean favorite) {
         return bookService.getBookByFavorite(favorite);
-}
-@GetMapping("/author")
-public List <Book> getBooksByAuthor (@RequestParam (value = "author" )String author){
+    }
+
+    @GetMapping("/author")
+    public List<Book> getBooksByAuthor(@RequestParam(value = "author") String author) {
         return bookService.getBooksByAuthor(author);
-}
+    }
 
-@PutMapping("/{id}")
-public Book updateBook(@PathVariable String id, @RequestBody Book book){
-    return bookService.updateBook(book);
-}
+    @PutMapping("/{id}")
+    public Book updateBook(@PathVariable String id, @RequestBody Book book) {
+        return bookService.updateBook(book);
+    }
 
-@DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
 
-    public void deleteBook(@PathVariable String id){
+    public void deleteBook(@PathVariable String id) {
         System.out.println("Delete methode");
-    bookService.deleteBook(id);
-}
+        bookService.deleteBook(id);
+    }
+
+
+    @GetMapping("/search")
+    public List<Book> getBooksByTitle(@RequestParam String title) {
+       return bookService.searchBooksByTitle(title);
+
+    }
 }

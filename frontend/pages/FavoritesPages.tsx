@@ -5,6 +5,7 @@ import axios from "axios";
 
 
 
+
 function FavoritesPage() {
 
 
@@ -33,12 +34,14 @@ function FavoritesPage() {
 
 
     return (
-        <div className="homepage-container" >
-            <h1 >Favoriten</h1>
-            <p >Hier sind deine Lieblingsbücher!</p>
-            <BookGallery books={data}></BookGallery>
+        <div className="homepage-container">
+            <h1>Favoriten</h1>
+            <p>Hier sind deine Lieblingsbücher!</p>
+            <div className="book-gallery ">
+                <BookGallery books={data}></BookGallery>
+            </div>
         </div>
-);
+    );
 }
 
 export default FavoritesPage;
