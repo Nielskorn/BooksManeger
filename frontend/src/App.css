@@ -10,6 +10,7 @@ body {
 
 h1, h2, h3 {
     margin: 0;
+    line-height: 1.2;
 }
 
 a {
@@ -32,25 +33,31 @@ a:hover {
 header {
     background-color: #333;
     color: white;
-    padding: 1rem 0;
-    text-align: center;
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
 }
 
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 0;
+    flex: 1;
 }
 
 header nav {
-    margin-top: 0.5rem;
+    display: flex;
+    gap: 1.5rem;
+    flex: 2;
+    justify-content: center;
 }
 
 header nav a {
-    margin: 0 1rem;
     color: white;
     font-weight: bold;
     font-size: 1rem;
@@ -60,20 +67,87 @@ header nav a:hover {
     text-decoration: underline;
 }
 
+.search-form {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.search-input {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    width: 200px;
+    transition: width 0.3s ease;
+}
+
+.search-input:focus {
+    width: 300px;
+}
+
+.search-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
 /* Footer Styles */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 1rem 0;
-    position:fixed;
+    position: fixed;
     bottom: 0;
     width: 100%;
     font-size: 0.9rem;
-
-
 }
 
 footer p {
     margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    header h1 {
+        text-align: center;
+        flex: 0;
+    }
+
+    header nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .search-form {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 150px;
+    }
+
+    .search-input:focus {
+        width: 200px;
+    }
 }

@@ -7,6 +7,7 @@ import FavoritesPage from "../pages/FavoritesPages.tsx";
 import {Link, Route, Routes} from "react-router-dom";
 import Manage from "../pages/Manage.tsx";
 import BookDetails from "../pages/BookDetails.tsx";
+import SearchResults from "../pages/SearchResults.tsx";
 
 
 // Importiere die neuen Seiten
@@ -22,6 +23,28 @@ function App() {
                     <Link to="/favorites">Favorites</Link>
                     <Link to="/manage">Manage</Link>
                 </nav>
+                <form
+                    className="search-form"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        const searchInput = (e.target as HTMLFormElement).querySelector(
+                            "input"
+                        ) as HTMLInputElement;
+                        const searchTerm = searchInput.value.trim();
+                        if (searchTerm) {
+                            window.location.href = `/search?title=${searchTerm}`;
+                        }
+                    }}
+                >
+                    <input
+                        type="text"
+                        placeholder="Search books..."
+                        className="search-input"
+                    />
+                    <button type="submit" className="search-button">
+                        🔍
+                    </button>
+                </form>
             </header>
 
             <main className="container">
@@ -30,6 +53,7 @@ function App() {
                     <Route path="/favorites" element={<FavoritesPage/>}/>
                     <Route path="/manage" element={<Manage/>}/>
                     <Route path="/book/:id" element={<BookDetails/>}/>
+                    <Route path="/search" element={<SearchResults />} />
                 </Routes>
             </main>
 
@@ -39,8 +63,8 @@ function App() {
         </>
 
 
-)
-    ;
+    )
+        ;
 }
 
 export default App;
