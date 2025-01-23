@@ -2,7 +2,7 @@ import BookGallery from "../src/Componets/BookGallery";
 import {useEffect, useState} from "react";
 import {Book} from "../src/types/Book.ts";
 import axios from "axios";
-import './MyPage.css'
+
 
 
 
@@ -24,31 +24,22 @@ import './MyPage.css'
              });
      }
 
-
-
      useEffect(() => {
          fetchData();
      }, []);
 
 
-
      return (
-         <div className="homepage-container">
-             <div className="homepage-header">
+         < >
                  <h1>Willkommen in der Book Library!</h1>
                  <p >
                      Hier kannst du Bücher durchsuchen und deine Favoriten speichern.
                  </p>
-             </div>
-
-             <div>
-
 
                  <div className="book-gallery">
                      <BookGallery books={data}/>
                  </div>
-             </div>
-         </div>
+         </>
      )
          ;
  }

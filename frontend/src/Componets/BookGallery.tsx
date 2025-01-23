@@ -1,6 +1,6 @@
 import { Book } from "../types/Book.ts";
 import BookCard from "./BookCard.tsx";
-import './Book.css'
+
 
 type BookGalleryProps = {
     books: Book[];

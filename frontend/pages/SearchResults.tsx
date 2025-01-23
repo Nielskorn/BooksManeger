@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BookGallery from "../src/Componets/BookGallery";
-import './SearchResults.css'
+
 
 
 

@@ -1,6 +1,6 @@
 import {FormEvent, useState} from "react";
 import axios from "axios";
-import './Book.css'
+
 
 
 export default function BookForm({fetchData}:{fetchData:()=>void}){
@@ -29,7 +29,9 @@ export default function BookForm({fetchData}:{fetchData:()=>void}){
 
     return(
         <>
-            <form onSubmit={OnSubmit} onReset={OnReset}>
+            <form
+                className="addform"
+                onSubmit={OnSubmit} onReset={OnReset}>
                 <label> Title:
                     <input type={"text"} value={title} onChange={event => {
                         setTitle(event.target.value)

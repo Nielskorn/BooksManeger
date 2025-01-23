@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../types/Book.ts";
 import axios from "axios";
-import './Book.css'
+
 
 
 export default function BookCard(book: Book) {
