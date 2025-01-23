@@ -34,7 +34,7 @@ function FavoritesPage() {
 
 
     return (
-        <div className="homepage-container">
+        <div className="index">
             <h1>Favoriten</h1>
             <p>Hier sind deine Lieblingsbücher!</p>
             <div className="book-gallery ">

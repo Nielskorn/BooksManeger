@@ -54,7 +54,7 @@ header h1 {
 header nav {
     display: flex;
     gap: 1.5rem;
-    flex: 2;
+    flex: 5;
     justify-content: center;
 }
 
@@ -285,6 +285,14 @@ form button[type="reset"]:hover {
     background-color: #c82333;
 }
 
+.index h1{
+    display: flex;
+    justify-content: center;
+}
+.index p{
+    display: flex;
+    justify-content: center;
+}
 
 
 
