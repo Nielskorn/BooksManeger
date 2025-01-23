@@ -32,7 +32,7 @@ function App() {
                         ) as HTMLInputElement;
                         const searchTerm = searchInput.value.trim();
                         if (searchTerm) {
-                           navigate("api/book/search"+searchTerm)
+                           navigate("/book/search"+searchTerm)
                         }
                     }}
                 >
@@ -53,7 +53,7 @@ function App() {
                     <Route path="/favorites" element={<FavoritesPage/>}/>
                     <Route path="/manage" element={<Manage/>}/>
                     <Route path="/book/:id" element={<BookDetails/>}/>
-                    <Route path="/search/:title" element={<SearchResults />} />
+                    <Route path="/book/search/:title" element={<SearchResults />} />
                 </Routes>
             </main>
 
