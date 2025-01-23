@@ -83,7 +83,7 @@ jobs:
     needs: push-to-docker-hub
     environment:
       name: Capstone Project
-      url: https://booksmaneger.onrender.com # Replace with your actual project URL
+      url: https://book-lib-latest.onrender.com/ # Replace with your actual project URL
     steps:
       - name: Trigger Render Deployment
         run: |
