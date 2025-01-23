@@ -53,7 +53,7 @@ function App() {
                     <Route path="/favorites" element={<FavoritesPage/>}/>
                     <Route path="/manage" element={<Manage/>}/>
                     <Route path="/book/:id" element={<BookDetails/>}/>
-                    <Route path="/search" element={<SearchResults />} />
+                    <Route path="/search/:title" element={<SearchResults />} />
                 </Routes>
             </main>
 
