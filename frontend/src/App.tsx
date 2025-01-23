@@ -4,7 +4,7 @@ import './App.css';
 
 import HomePage from "../pages/HomePage.tsx";
 import FavoritesPage from "../pages/FavoritesPages.tsx";
-import {Link, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes, useNavigate} from "react-router-dom";
 import Manage from "../pages/Manage.tsx";
 import BookDetails from "../pages/BookDetails.tsx";
 import SearchResults from "../pages/SearchResults.tsx";
@@ -13,7 +13,7 @@ import SearchResults from "../pages/SearchResults.tsx";
 // Importiere die neuen Seiten
 
 function App() {
-
+    const navigate = useNavigate()
     return (
         <>
             <header>
@@ -32,7 +32,7 @@ function App() {
                         ) as HTMLInputElement;
                         const searchTerm = searchInput.value.trim();
                         if (searchTerm) {
-                            window.location.href = `/search?title=${searchTerm}`;
+                           navigate("api/book/search"+searchTerm)
                         }
                     }}
                 >
