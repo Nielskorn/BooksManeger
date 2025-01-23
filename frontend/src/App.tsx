@@ -33,6 +33,7 @@ function App() {
                         const searchTerm = searchInput.value.trim();
                         if (searchTerm) {
                             console.log(searchTerm)
+                           navigate("/book/search?title="+searchTerm)
                            navigate({pathname:"/book/search/", search:"?title="+searchTerm})
                         }
                     }}

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {Book} from "../src/types/Book.ts";
-import './MyPage.css'
+
 
 
 
@@ -63,19 +63,13 @@ export default function BookDetails() {
     }
     return (
         <>
-            <div className="book-card-details">
-                <h1>Buchdetails</h1>
-                <h2>{book.title}</h2>
-                <img src={book.image} alt={book.title} />
-                <p>Author: {book.author}</p>
-                <p>ISBN: {book.isbn}</p>
-            </div>
 
-
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                updateBook();
-            }}
+            <form
+                className="addform"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    updateBook();
+                }}
             >
                 <h3>Buch bearbeiten</h3>
                 <label>
@@ -91,8 +85,18 @@ export default function BookDetails() {
                     <input type="text" value={image} onChange={(e) => setImage(e.target.value)}/>
                 </label>
                 <button type="submit">Update</button>
-                <button onClick={() => deleteBook(book.isbn)}>Löschen</button>
+                <button type={"reset"}
+                        onClick={() => deleteBook(book.isbn)}>Löschen
+                </button>
+
             </form>
+            <div className="book-card">
+                <h1>Buchdetails</h1>
+                <h2>{book.title}</h2>
+                <img src={book.image} alt={book.title}/>
+                <p>Author: {book.author}</p>
+                <p>ISBN: {book.isbn}</p>
+            </div>
 
 
         </>
