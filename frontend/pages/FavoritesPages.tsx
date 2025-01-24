@@ -3,15 +3,12 @@ import BookGallery from "../src/Componets/BookGallery.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-
-
-
 function FavoritesPage() {
-
-
-
-   //
     const [data, setData] = useState<Book[]>([]);
+
+    function handleFavoriteRemoved(isbn: string) {
+        setData((prevData) => prevData.filter((book) => book.isbn !== isbn));
+    }
 
     // Funktion zum Datenholen
     function fetchFavorite() {
@@ -38,7 +35,9 @@ function FavoritesPage() {
             <h1>Favoriten</h1>
             <p>Hier sind deine Lieblingsbücher!</p>
             <div className="book-gallery ">
-                <BookGallery books={data}></BookGallery>
+                <BookGallery books={data}
+                onFavoriteRemoved={handleFavoriteRemoved} // Übergib die Funktion
+                    />
             </div>
         </div>
     );

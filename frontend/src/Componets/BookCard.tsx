@@ -6,9 +6,10 @@ import axios from "axios";
 type BookCardProps = {
     book: Book;
     managePage?: boolean; // Neue Prop für die Steuerung der Buttons
+    onFavoriteRemoved?: (isbn: string) => void; // Neue Prop für das Entfernen von Favoriten
 };
 
-export default function BookCard({ book, managePage = false }: BookCardProps) {
+export default function BookCard({ book, managePage = false, onFavoriteRemoved }: BookCardProps) {
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState<boolean>(book.favorite);
     const [showActions, setShowActions] = useState<boolean>(false); // Zustand hinzugefügt
@@ -32,7 +33,12 @@ export default function BookCard({ book, managePage = false }: BookCardProps) {
 
         axios.put(`/api/book/${book.isbn}`, updatedBook)
             .then(() => {
-                alert(isLiked ? "Like entfernt" : "Buch geliked");
+
+                setIsLiked(!isLiked);
+                if(!updatedBook.favorite && onFavoriteRemoved){
+                    onFavoriteRemoved(book.isbn);
+
+                }
             })
             .catch((error) => console.error("Fehler beim Liken:", error));
     }
