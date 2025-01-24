@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+               .gitignore
+               README.MD
 
 jobs:
   build-frontend:
